@@ -1,0 +1,28 @@
+/* NAYA BANK JODNE KA TEMPLATE  (isko copy karke  js/banks/mybank.js  naam do, phir registry.js mein "mybank" jodo)
+
+   parse(pages) ko ye object return karna hai (saari tarikhein 'YYYY-MM-DD'):
+   {
+     bank: NAME, client: "CLIENT KA NAAM", account: "6708",
+     period_start: "2025-10-01", period_end: "2025-10-31",
+     partial: false,                 // true agar mahina adhura hai (month-to-date print)
+     begin: 23996.75, end: 46491.41, // opening / closing balance (pata na ho to null)
+     stated_credits: 579368.23,      // bank ne jo total credits likhe (pata na ho to null)
+     stated_debits: 556873.57,       // bank ne jo total debits likhe
+     unparsed_debits: 0,             // jo debits parse nahi kiye (jaise checks table) unka total
+     stated_avg_ledger: 20217.22,    // bank ne average balance likha ho to, warna null
+     daily: { "2025-10-01": 11336.49 },   // din ke end ka balance (jitne din milein) ya {}
+     txns: [ { date: "2025-10-03", desc: "Zel From ...", amount: 59.88,   // credit +, debit -
+               ref: "", section: "Deposits" } ]
+   }
+   pages[i].words = [{text, x0, x1, top}]  (points mein, top = page ke upar se doori).
+   Helpers: MCA.linesOf(words), MCA.textOf(words), MCA.money("1,234.56-"), MCA.iso(y,m,d).
+   Example ke liye pnc.js ya wells_fargo.js dekho. Sabse zaroori: parsed credits/debits bank ke total se match hone chahiye. */
+(function () {
+  const NAME = "Mera Bank";
+  function parse(pages) {
+    throw new Error("Yahan parser likho");
+  }
+  MCA.registerBank({ name: NAME, priority: 0,
+    detect: (firstPageText) => firstPageText.includes("MERE BANK KA UNIQUE SHABD"),
+    parse });
+})();
